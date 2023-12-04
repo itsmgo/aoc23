@@ -24,7 +24,7 @@ func Solve1(input string) int {
 			}
 			num, err := strconv.Atoi(win)
 			if err != nil {
-				fmt.Println("Error converting to number '", num, "'")
+				fmt.Println("Error converting winning to number '", num, "'")
 				return 0
 			}
 			winingNumbers = append(winingNumbers, num)
@@ -35,7 +35,7 @@ func Solve1(input string) int {
 			}
 			num, err := strconv.Atoi(own)
 			if err != nil {
-				fmt.Println("Error converting to number '", num, "-")
+				fmt.Println("Error converting owned to number '", num, "-")
 				return 0
 			}
 			ownedNumbers = append(ownedNumbers, num)
