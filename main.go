@@ -9,6 +9,7 @@ import (
 	"github.com/itsmgo/aoc23/day3"
 	"github.com/itsmgo/aoc23/day4"
 	"github.com/itsmgo/aoc23/day5"
+	"github.com/itsmgo/aoc23/day6"
 )
 
 func main() {
@@ -30,4 +31,9 @@ func main() {
 
 	input = common.LoadInputContent("day5/input.txt")
 	fmt.Println("Day 5, part 1:", day5.Solve1(input))
+	fmt.Println("Day 5, part 2:", day5.Solve2(input))
+
+	input = common.LoadInputContent("day6/input.txt")
+	fmt.Println("Day 6, part 1:", day6.Solve1(input))
+	fmt.Println("Day 6, part 2:", day6.Solve2(input))
 }
