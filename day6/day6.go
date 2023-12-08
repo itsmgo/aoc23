@@ -1,9 +1,5 @@
 package day6
 
-import (
-	"fmt"
-)
-
 const VELOCITY = 1
 
 func Solve1(input string) int {
@@ -30,13 +26,11 @@ func Solve1(input string) int {
 
 func Solve2(input string) int {
 
-	// T = 54946592
-	// d_min = 302147610291404
+	// time := 54946592
+	// distance := 302147610291404
+
 	// d(t) = (T-t)*t
 	// d(t) = d_min = (T-t_min)*t_min
-
-	time := 54946592
-	distance := 302147610291404
 
 	// timeGuess := 54946592/2 - (48748501 - 54946592/2)
 	// distanceGuess := (time - timeGuess) * timeGuess
@@ -51,7 +45,7 @@ func Solve2(input string) int {
 	// }
 	tMin := 6198091
 	tMax := 48748501
-	fmt.Println((time-tMin)*tMin*VELOCITY - distance)
-	fmt.Println((time-tMax)*tMax*VELOCITY - distance)
+	// fmt.Println((time-tMin)*tMin*VELOCITY - distance)
+	// fmt.Println((time-tMax)*tMax*VELOCITY - distance)
 	return tMax - tMin + 1
 }
