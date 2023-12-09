@@ -2,6 +2,7 @@ package day8
 
 import (
 	"fmt"
+	"slices"
 	"strings"
 )
 
@@ -59,22 +60,55 @@ func Solve2(input string) int {
 		nodeTree[strings.Split(node, " = ")[0]] = Node{strings.Split(node, " = ")[0], mapNodes[0][1:], mapNodes[1][:3]}
 	}
 
+	initialNodes := FindNodesEndingWith(nodeTree, "A")
 	currentNodes := FindNodesEndingWith(nodeTree, "A")
 	steps := 0
+	lastCycles := map[int]int{}
 	for !AreNodesEndingWith(currentNodes, "Z") {
 		for _, instruction := range instructions {
-			// fmt.Println(string(instruction))
-			// fmt.Println(currentNodes)
-			if AreNodesEndingWith(currentNodes, "Z") {
+			for i, node := range currentNodes {
+				if node.name == initialNodes[i].name {
+					_, exists := lastCycles[i]
+					if !exists {
+						lastCycles[i] = steps
+					}
+				}
+			}
+			if len(lastCycles) == 6 {
 				break
 			}
 			steps += 1
 			currentNodes = MapNodes(currentNodes, instruction, nodeTree)
-			// fmt.Println(currentNodes)
 		}
-		fmt.Println(steps)
+
+		if len(lastCycles) == 6 {
+			fmt.Println(lastCycles)
+			break
+		}
+		// 18157
+		// 14363
 	}
-	return steps
+	mcm := make([][]int, 0)
+	for _, value := range lastCycles {
+		list := make([]int, 0)
+		for i := 1; i < 1000; i++ {
+			list = append(list, value*i)
+		}
+		mcm = append(mcm, list)
+	}
+	for _, value := range mcm[0] {
+		total := 0
+		for _, minCoMul := range mcm {
+			if slices.Contains(minCoMul, value) {
+				total += 1
+			}
+		}
+		if total > 5 {
+			return value
+		}
+	}
+	solution := 1
+	return solution
 }
 
 func FindNodesEndingWith(nodes map[string]Node, ending string) []Node {
