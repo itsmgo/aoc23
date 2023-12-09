@@ -60,14 +60,13 @@ func Solve2(input string) int {
 		nodeTree[strings.Split(node, " = ")[0]] = Node{strings.Split(node, " = ")[0], mapNodes[0][1:], mapNodes[1][:3]}
 	}
 
-	initialNodes := FindNodesEndingWith(nodeTree, "A")
 	currentNodes := FindNodesEndingWith(nodeTree, "A")
 	steps := 0
 	lastCycles := map[int]int{}
 	for !AreNodesEndingWith(currentNodes, "Z") {
 		for _, instruction := range instructions {
 			for i, node := range currentNodes {
-				if node.name == initialNodes[i].name {
+				if string(node.name[len(node.name)-1]) == "Z" {
 					_, exists := lastCycles[i]
 					if !exists {
 						lastCycles[i] = steps
@@ -82,7 +81,6 @@ func Solve2(input string) int {
 		}
 
 		if len(lastCycles) == 6 {
-			fmt.Println(lastCycles)
 			break
 		}
 		// 18157
@@ -91,7 +89,7 @@ func Solve2(input string) int {
 	mcm := make([][]int, 0)
 	for _, value := range lastCycles {
 		list := make([]int, 0)
-		for i := 1; i < 1000; i++ {
+		for i := 1; i < 100; i++ {
 			list = append(list, value*i)
 		}
 		mcm = append(mcm, list)
